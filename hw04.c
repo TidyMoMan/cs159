@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void calcLetter(int, int*, char*, char*);
-int getYear();
+void getYear();
 void printData(int, int, char, char);
 
 int main()
@@ -18,7 +18,7 @@ int main()
     return 0;
 }
 
-int getYear(int *year)
+void getYear(int *year)
 {
     printf("Enter year -> ");
     scanf("%d", year);
@@ -31,20 +31,20 @@ void calcLetter(int year, int *day, char *YDL1, char *YDL2)
 
     if(year % 4 == 0) //if leap year
     {
-        *YDL1 = (char)71 - *day; //Convert to correct char
+        *YDL1 = (char)(71 - *day); //Convert to correct char
         *YDL2 = *YDL1;
         (*YDL1 != 'G') ? (*YDL1 += 1) : (*YDL1 = 'A');
     }
     else //if not leap year
     {
-        *YDL1 = (char)65 + *day; //Convert to correct char
+        *YDL1 = (char)(65 + *day); //Convert to correct char
         *YDL2 = ' '; //no second YDL needed if leap year
     }
 }
 
 void printData(int year, int day, char YDL1, char YDL2){
 
-    printf("day = %d\n", day);
+    (day == 0) ? (day--) : (day = 6); 
 
     switch(day) //print out the correct day of the week
     {

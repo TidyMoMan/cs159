@@ -44,37 +44,34 @@ void calcLetter(int year, int *day, char *YDL1, char *YDL2)
 
 void printData(int year, int day, char YDL1, char YDL2){
 
-    (day == 0) ? (day--) : (day = 6); 
+    printf("\n");
 
     switch(day) //print out the correct day of the week
     {
-        case 0:
+        case 1:
             printf("01 January %d falls on a: Monday", year);
         break;
-        case 1:
+        case 2:
             printf("01 January %d falls on a: Tuesday", year);
         break;
-        case 2:
+        case 3:
             printf("01 January %d falls on a: Wednesday", year);
         break;
-        case 3:
+        case 4:
             printf("01 January %d falls on a: Thursday", year);
         break;
-        case 4:
+        case 5:
             printf("01 January %d falls on a: Friday", year);
         break;
-        case 5:
+        case 6:
             printf("01 January %d falls on a: Saturday", year);
         break;
-        case 6:
+        case 0:
             printf("01 January %d falls on a: Sunday", year);
-        break;
-        default:
-            printf("day: %d", day);
         break;
     }
 
-    (YDL2 != ' ') ? printf("\nDominical leters:           %c%c\n", YDL1, YDL2) : printf("\nDominical leters:           %c\n", YDL1);
+    (YDL2 != ' ') ? printf("\nDominical letters:          %c%c\n", YDL1, YDL2) : printf("\nDominical letters:          %c\n", YDL1);
 
     /* gigantic ugly if-else statement that prints the months of friday the 13th */
     if(YDL1 == 'A' && YDL2 == ' ')

@@ -4,7 +4,8 @@
 void getSMM(int*, int*, int*);
 void calcNumbers(int, int);
 int getRandInRange(int, int);
-int shiftDigits(int, int);
+int getNthDigit(int, int);
+int getNumDigits(int);
 
 int  main()
 {
@@ -39,17 +40,29 @@ void getSMM(int *seed, int *min, int *max) //(get seed, min, max)
 void calcNumbers(int seed, int randomNum)
 {
     printf("Larger numbers generated from %d: ", seed);
-    printf("%d", shiftDigits(seed, 1));  
+    printf("%d", getNumDigits(seed));
+
+    int i = 0;
+    while(i < getNumDigits(seed))
+    {
+        i++;
+        printf("%d", getNthDigit(seed, i));
+    }
+
 }
 
-int shiftDigits(int input, int n)
+int getNthDigit(int input, int n)
 {
-    int nthDigit;
-    nthDigit = input % (10 * n);
-       
+    return input % (10 * n);
 }
 
-int getNumDigits(int n)
+int getNumDigits(int input)
 {
-    while
+    int digits = 0;
+    while(input % 10 == 0)
+    {
+        input /= 10;
+        digits++;
+    }
+    return digits;
 }

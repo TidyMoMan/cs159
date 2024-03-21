@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 void getSMM(int*, int*, int*);
 void calcNumbers(int, int);
 int getRandInRange(int, int);
-int getNthDigit(int, int);
 int getNumDigits(int);
 
 int  main()
 {
-    int seed;
-    int min;
-    int max;
+    int seed; //seed for random generator
+    int min; //minimum allowed number 
+    int max; //maximum allowed number
 
     getSMM(&seed, &min, &max);
     srand((unsigned int)(seed));
@@ -67,29 +67,47 @@ void getSMM(int *seed, int *min, int *max) //(get seed, min, max)
 
 void calcNumbers(int seed, int randomNum)
 {
-    printf("Larger numbers generated from %d: ", seed);
-    int toMult = 0;
-    int digits = 0;
-    printf("original: %d", randomNum);
-    toMult = randomNum % getNumDigits(randomNum);
-    digits = getNumDigits(randomNum);
-    randomNum = (randomNum - (randomNum % 10))/10;
-    randomNum += toMult * (digits * 10);
-    printf("\ngenerated: %d", randomNum);
-}
+    int total = 0; //total of numbers larger than the original
+    int original = 0; //holds the original
+    int onesPlace; //the ones place of the current number
+    int newNum; //the new number generated from the old one
+    int i; //for loop index
 
-int getNthDigit(int input, int n)
-{
-    return input % (10 * n);
+    original = randomNum;
+
+    printf("\nLarger numbers generated from %d: ", original);
+    
+    for (i = 0; i < getNumDigits(randomNum); i++){    
+    
+    onesPlace = randomNum % 10; //get last digit
+    randomNum = randomNum / 10; //remove last digit
+    newNum = 0; //reset newNum
+
+    newNum = (int)(randomNum + (pow(10, getNumDigits(randomNum)) * onesPlace));
+    
+    //printf("\ntotal: %d newNum: %d", total, newNum);
+    if(newNum > original){
+        printf("%d ", newNum);
+        total++;
+    }
+    randomNum = newNum;
+    }
+
+    printf("\nCount of larger numbers generated from %d: %d", original, total);
+
+    // firstDigit = num % 10 //get last digit
+    // num /= 10 //remove last digit
+    // newNum += numDigits(num) * 10 * firstFigit //move last digit to first digit
 }
 
 int getNumDigits(int input)
 {
-    int digits = 0;
-    while(input % 10 == 0)
+    int digits = 0; //the number of digits
+    while(input / 10 != 0)
     {
         input /= 10;
         digits++;
     }
+    digits++;
     return digits;
 }

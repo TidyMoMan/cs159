@@ -11,7 +11,7 @@ int  main()
 
     long long target = 1902830928136879;
     int curMax = 0;
-    int curdigit;
+    int curdigit;e
 
     int digits = ceil(log10(target)); //gets the number of digits in the number
 

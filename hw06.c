@@ -1,33 +1,70 @@
 #include <stdio.h>
 #include <math.h>
 
-long long toBin(long long);
+void toBin(long long, int[]);
+void toFloat(int[]);
+void printValues(int, int, float, int[]);
 
 int main(){
-    long long input = 0;
+    long long input = -1; //input long / validation var
+    int binary[32]; //array of binary digits
 
-    printf("Enter raw value -> ");
-    scanf("%lld", &input);
+    while(input < 1){
+        printf("Enter raw value -> ");
+        scanf("%lld", &input);
+        (input < 1) ? printf("\nError! Raw value must be non-negative.\n"):0;
+    }
 
-    toBin(input);
+    toBin(input, binary);
+    toFloat(binary);
 
     return 0;
 }
 
-long long toBin(long long input){
+void toBin(long long input, int binary[]){
     int i; //lcv
-    int binary[32]; //binary number as an array
-    input > -1 ? binary[32] = 0 : binary [32] = 1;
-    for(i = 0; i < 31; i++){
+    binary[31] = 1; //annoying lvalue workaround
+    input > -1 ? binary[31] = 0:0;
+
+    for(i = 0; i < 32; i++){
         binary[i] = (input / (int)pow(2, i)) % 2;
-        printf("%d", binary[i]);
     }
-    return binary;
 }
 
-int[] toFloat(int binary[]){
-    int values[]; //used to return sign, exponent, and mantissa
+void toFloat(int binary[]){
+    int i; //lcv
+    float mantissa = 0; //fractional value
+    int exp = 0; //exponent
+    float result = 0; //final floating point result
 
+    for(i = 0; i < 23; i++){
+        mantissa += binary[i] * pow(2, (-23 + i));
+    }
 
-    return []
+    for(i = 23; i < 31; i++){
+        exp += (binary[i] * pow(2, (i - 23)));
+    }
+
+    result = pow(-1, binary[31]) * pow(2, (exp - 127)) * (1 + mantissa);
+
+    printValues(binary[31], exp, result, binary);
+}
+
+void printValues(int sign, int exp, float value, int rawBinary[]){
+    int i; //lcv
+
+    printf("\nSign: %d (%+d)", sign, sign);
+
+    printf("\nExponent: ");
+    for(i = 31; i != 23; i--){
+        i % 4 != 0 ? printf("%d",rawBinary[i - 1]) : printf("%d ",rawBinary[i - 1]);
+    }
+    printf(" (%d)", exp);
+
+    printf("\nSignificand: ");
+    for(i = 23; i != 0; i--){
+        i % 4 != 0 ? printf("%d",rawBinary[i - 1]) : printf("%d ",rawBinary[i - 1]);
+    }
+
+    printf("\nValue: %+8e", value);
 }

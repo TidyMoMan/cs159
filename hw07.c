@@ -1,17 +1,3 @@
-/*****+--**--***-**-*-*-*--******-*---**--**--*--***************************
- *
- *  Homework #: 07
- *
- *  Academic Integrity Statement:
- *
- *  I have not used source code obtained from any other unauthorized source, 
- *  either modified or unmodified.  Neither have I provided access to my code 
- *  to another. The effort I am submitting is my own original work.
- *
- *  Program Description:
- *   generates and outputs dominant numbers (an integer in which more than half of its digits are the same) according to a user-specified seed and range.
- ******+--**--***-**-*-*-*--******-*---**--**--*--**************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -40,22 +26,6 @@ int main()
   return 0;
 }
 
-/*****+--*--**-*-**---*-*--******-*---**--**--*--***************************
- *
- *  Function Information
- *
- *  Name of Function: findNumbers
- *
- *  Function Return Type: void
- *
- *  Parameters (list data type, name, and comment one per line):
- *    1. int min - minumum range
- *    2. int max - maximum range
- *    3. int numbers[] - array to fill with numbers
- *    4. int numberIndex[] - array to fill with digits
- *  Function Description:
- *
- ******+--*--**-*-**---*-*--******-*---**--**--*--**************************/
 void findNumbers(int min, int max, int numbers[], int numberIndex[])
 {
   int i = 0; //lcv
@@ -96,22 +66,6 @@ void findNumbers(int min, int max, int numbers[], int numberIndex[])
   }
 }
 
-/*****+--**-**-*-**---*-*--******-*---**--**--*--***************************
- *
- *  Function Information
- *
- *  Name of Function: printValues
- *
- *  Function Return Type: void
- *
- *  Parameters (list data type, name, and comment one per line):
- *    1. int dom[] - array of dominant numbers
- *    2. int domDigit[] - array of digits that make the number dominant
- *    3.
- *
- *  Function Description:
- *  Prints all numbers & formats nicely :)
- ******+--**-**-*-**---*-*--******-*---**--**--*--**************************/
 void printValues(int dom[], int domDigit[])
 {
   int i = 0; //lcv
@@ -181,6 +135,8 @@ void printValues(int dom[], int domDigit[])
     }
   }
 }
+
+//ghastly header eh mate?
 
 /*****+--*---***-**---*-*--******-*---**--**--*--***************************
  *
